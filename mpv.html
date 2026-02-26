@@ -1,0 +1,1217 @@
+# HTML   
+  
+<!DOCTYPE html>  
+<html lang="de-DE">  
+    <head>  
+        <meta charset="utf-8">  
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">  
+        <title>{{Mitarbeiter.Vorname}} {{Mitarbeiter.Nachname}} | Kandidatenprofil</title>  
+        <style type="text/css">  
+            /* General Html */  
+            html, body {  
+                margin: 0;  
+                padding: 0;  
+                font-size: 19px;  
+            }  
+  
+            body {  
+                color: #252d3e;  
+                font-family: {{Design.Schriftart}};  
+            }  
+  
+            /* Table */  
+            table, tbody, tr, td {  
+                padding: 0px;  
+                margin: 0px;  
+                border: none;  
+                border-spacing: 0;  
+                border-collapse: separate;  
+            }  
+  
+            .column-left,  
+            .column-right,  
+            .footer-column-left,  
+            .footer-column-right {  
+                line-height: 200%;  
+                vertical-align: top;  
+            }  
+  
+            .footer-column-left,  
+            .column-left {  
+                width: 33.33%;  
+                text-align: right;  
+                padding-right: 50px;  
+            }  
+  
+            .column-left {  
+                color: {{Design.Sekundaerfarbe}};  
+                background-color: {{Design.Primaerfarbe}};  
+                /* Firefox Table-Border Bug später im PDF gering wie möglich halten */  
+                border: 1px solid {{Design.Primaerfarbe}};  
+            }  
+  
+            .footer-column-right,  
+            .column-right {  
+                width: 66.66%;  
+                padding-left: 50px;  
+            }  
+  
+            /* Utilities */  
+            .text--right {  
+                text-align: right;  
+            }  
+  
+            .border-top--black {  
+                border-top: 1px solid #000;  
+            }  
+  
+            .m-4px {  
+                margin: 4px;  
+            }  
+  
+            .m--0 {  
+                margin: 0;  
+            }  
+  
+            .font--bold {  
+                font-weight: bold;  
+            }  
+  
+            /* Component/Section specific */  
+            .firmenlogo {  
+                max-width: 200px;  
+            }  
+  
+            .kandidatenfoto {  
+                padding: 0;  
+                text-align: center;  
+            }  
+  
+            .kandidatenfoto img {  
+                border: 8px solid #ffffff;  
+                width: 100%;  
+                max-width: 150px;  
+            }  
+  
+            .beworben-als {  
+                font-size: 21px;  
+                margin-top: 15px;  
+                margin-bottom: 15px;  
+                font-weight: bold;  
+            }  
+  
+            .detail-list {  
+                padding-left: 1em;  
+                margin: 0;  
+                list-style-type: circle;  
+            }  
+  
+            .skill-item {  
+                margin-top: 0px;  
+                margin-bottom: 0px;  
+            }  
+  
+            .skill-item img {  
+                width: 60px;  
+                height: 20px;  
+                vertical-align: text-bottom;  
+            }  
+        </style>  
+        <style type="text/css" media="print">  
+            @page {  
+                margin: 0px;  
+            }  
+  
+            html,   
+            body {  
+                font-size: 16px;  
+            }  
+  
+            .column-left,  
+            .column-right,  
+            .footer-column-left,  
+            .footer-column-right {  
+                line-height: 120%;  
+            }  
+  
+            .beworben-als {  
+                font-size: 17px;  
+            }  
+        </style>  
+    </head>  
+    <body>  
+  
+        <table cellspacing="0" cellpadding="0pt" style="width: 100%" class="page">  
+            <tbody>  
+  
+                <!-- Firmenlogo -->  
+                <tr>  
+                    <td class="column-left">&nbsp;</td>  
+                    <td class="column-right text--right">  
+                        <conditional condition="Design.LogoUrl">  
+                            <img class="firmenlogo" src="{{Design.LogoUrl}}">  
+                        </conditional>  
+                    </td>  
+                </tr>  
+  
+                <!-- Kandidatenfoto + Freitext -->  
+                <tr>  
+                    <td class="column-left kandidatenfoto">  
+                        <conditional condition="Mitarbeiter.AvatarImg">  
+                            <img src="{{Mitarbeiter.AvatarImg}}">  
+                        </conditional>  
+                    </td>  
+                    <td class="column-right" valign="bottom">  
+                        <p class="m-4px">  
+                            <b>  
+                                Über <span *if="Mitarbeiter.Vorname">{{Mitarbeiter.Vorname}}</span>   
+                                <span *if="Mitarbeiter.Nachname">{{Mitarbeiter.Nachname}}</span>  
+                                [Freitextfeld]  
+                            </b>  
+                            <br>  
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut  
+                            labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et  
+                            ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+                        </p>  
+  
+                        <!-- Mögliches Beispiel -->  
+                        <!-- <conditional condition="Mitarbeiter.SonstigeAngaben.SonstigeAngabenMitarbeiter"> -->  
+                            <!-- <foreach property="Mitarbeiter.SonstigeAngaben.SonstigeAngabenMitarbeiter" item="Item"> -->  
+                                <!-- <conditional condition="Item.Wert"> -->  
+                                    <!-- <p class="m-4px"> -->  
+                                        <!-- <b> -->  
+                                            <!-- {{Item.Bezeichnung}} -->  
+                                        <!-- </b> -->  
+                                        <!-- <span> -->  
+                                            <!-- {{Item.Wert}} -->  
+                                        <!-- </span> -->  
+                                    <!-- </p> -->  
+                                <!-- </conditional> -->  
+                            <!-- </foreach> -->  
+                        <!-- </conditional> -->  
+                    </td>  
+                </tr>  
+  
+                <!-- Empty row for spacing -->  
+                <tr>  
+                    <td class="column-left">&nbsp;</td>  
+                    <td class="column-right">&nbsp;</td>  
+                </tr>  
+  
+                <tr>  
+                    <td class="column-left">  
+                        <b>  
+                            Allgemeine Angaben  
+                        </b>  
+                    </td>  
+                    <td class="column-right">&nbsp;</td>  
+                </tr>  
+  
+                <!-- Name -->  
+                <tr>  
+                    <td class="column-left">  
+                        Name  
+                    </td>  
+                    <td class="column-right">  
+                        {{ Mitarbeiter.Vorname }} {{ Mitarbeiter.Nachname }}  
+                    </td>  
+                </tr>  
+  
+                <!-- Alter -->  
+                <conditional condition="Mitarbeiter.Alter">  
+                    <tr>  
+                        <td class="column-left">  
+                            Alter  
+                        </td>  
+                        <td class="column-right">  
+                            {{ Mitarbeiter.Alter }}  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <!-- Adresse/Wohnort -->  
+                <conditional condition="Mitarbeiter.AdresseOrt">  
+                    <tr>  
+                        <td class="column-left">  
+                            Wohnhaft in  
+                        </td>  
+                        <td class="column-right">  
+                            <span *if="Mitarbeiter.AdresseStrasse">{{Mitarbeiter.AdresseStrasse}}</span>  
+                            <span *if="Mitarbeiter.AdresseHausnummer">{{Mitarbeiter.AdresseHausnummer}}</span>  
+                            <br>  
+                            <span *if="Mitarbeiter.AdressePlz">{{Mitarbeiter.AdressePlz}}</span>  
+                            <span *if="Mitarbeiter.AdresseOrt">{{Mitarbeiter.AdresseOrt}}</span>  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <!--Nationalität-->  
+                <conditional condition="Mitarbeiter.Nationalitaet">  
+                    <tr>  
+                        <td class="column-left">  
+                            Nationalität  
+                        </td>  
+                        <td class="column-right">  
+                            {{Mitarbeiter.Nationalitaet}}  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <!--Beworben als / Stellenbezeichnung-->  
+                <conditional condition="Mitarbeiter.BeworbenAls">  
+                    <tr>  
+                        <td class="column-left beworben-als">  
+                            Beworben als  
+                        </td>  
+                        <td class="column-right beworben-als">  
+                            {{Mitarbeiter.BeworbenAls}}  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <!--Verfügbarkeit-->  
+                <conditional condition="Mitarbeiter.VerfuegbarAb">  
+                    <tr>  
+                        <td class="column-left">  
+                            Verfügbar ab  
+                        </td>  
+                        <td class="column-right">  
+                            {{Mitarbeiter.VerfuegbarAb}}  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <!--Gehaltsvorstellung-->  
+                <conditional condition="Mitarbeiter.Gehalt || Mitarbeiter.GehaltBis">  
+                    <tr>  
+                        <td class="column-left">  
+                            Gehaltsvorstellung  
+                        </td>  
+                        <td class="column-right">  
+                            <conditional condition="Mitarbeiter.Gehalt">  
+                                <defvar name="Gehalt" expression="'' + Mitarbeiter.Gehalt" />  
+                                <defvar name="Gehalt" expression=":Iif(:String.EndsWith(Gehalt, ',00'), :String.Replace(Gehalt, ',00', ''), Gehalt)" />  
+                                <defvar name="Gehalt" expression=":Iif(:String.EndsWith(Gehalt, '.00'), :String.Replace(Gehalt, '.00', ''), Gehalt)" />  
+                                {{Gehalt}}  
+                            </conditional>  
+                            <conditional condition="Mitarbeiter.Gehalt && Mitarbeiter.GehaltBis"> - </conditional>  
+                            <conditional condition="Mitarbeiter.GehaltBis">  
+                                <defvar name="GehaltBis" expression="'' + Mitarbeiter.GehaltBis" />  
+                                <defvar name="GehaltBis" expression=":Iif(:String.EndsWith(GehaltBis, ',00'), :String.Replace(GehaltBis, ',00', ''), GehaltBis)" />  
+                                <defvar name="GehaltBis" expression=":Iif(:String.EndsWith(GehaltBis, '.00'), :String.Replace(GehaltBis, '.00', ''), GehaltBis)" />  
+                                {{GehaltBis}}  
+                            </conditional>  
+                            {{Mitarbeiter.GehaltWaehrung}}  
+                            {{Mitarbeiter.GehaltZeitraum}}  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <!--Führerschein-->  
+                <conditional condition="Mitarbeiter.Fuehrerscheine">  
+                    <tr>  
+                        <td class="column-left">  
+                            Führerscheine  
+                        </td>  
+                        <td class="column-right">  
+                            <foreach property="Mitarbeiter.Fuehrerscheine" item="Item" sort="Item.Bezeichnung asc">  
+                                {{Item.Bezeichnung}}<conditional condition="!Item.$IstLetztesElement">, </conditional>  
+                            </foreach>  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <!--Mobilität-->  
+                <conditional condition="Mitarbeiter.Mobilitaeten">  
+                    <tr>  
+                        <td class="column-left">  
+                            Mobilität  
+                        </td>  
+                        <td class="column-right">  
+                            <foreach property="Mitarbeiter.Mobilitaeten" item="Item" sort="Item.Bezeichnung asc">  
+                                {{Item.Bezeichnung}}<conditional condition="!Item.$IstLetztesElement">, </conditional>  
+                            </foreach>  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <!--Schichtbereitschaften-->  
+                <conditional condition="Mitarbeiter.Schichtbereitschaften">  
+                    <tr>  
+                        <td class="column-left">  
+                            Schichtbereitschaften  
+                        </td>  
+                        <td class="column-right">  
+                            <foreach property="Mitarbeiter.Schichtbereitschaften" item="Item" sort="Item.Bezeichnung asc">  
+                                {{Item.Bezeichnung}}<conditional condition="!Item.$IstLetztesElement">, </conditional>  
+                            </foreach>  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <!-- Empty row for spacing -->  
+                <tr>  
+                    <td class="column-left">&nbsp;</td>  
+                    <td class="column-right">&nbsp;</td>  
+                </tr>  
+  
+                <!-- Empty row for spacing -->  
+                <tr>  
+                    <td class="column-left">&nbsp;</td>  
+                    <td class="column-right border-top--black">&nbsp;</td>  
+                </tr>  
+  
+                <tr>  
+                    <td class="column-left">  
+                        <b>  
+                            Lebenslauf  
+                        </b>  
+                    </td>  
+                    <td class="column-right">&nbsp;</td>  
+                </tr>  
+  
+                <!-- Empty row for spacing -->  
+                <tr>  
+                    <td class="column-left">&nbsp;</td>  
+                    <td class="column-right">&nbsp;</td>  
+                </tr>  
+  
+                <!-- Beschaeftigungen -->  
+                <conditional condition="Mitarbeiter.Beschaeftigungen">  
+                    <tr>  
+                        <td class="column-left">  
+                            <b>  
+                                Beschäftigungen  
+                            </b>  
+                        </td>  
+                        <td class="column-right">&nbsp;</td>  
+                    </tr>  
+  
+                    <foreach property="Mitarbeiter.Beschaeftigungen" item="Item" sort="Item.Von desc,Item.Bis desc">  
+                        <conditional condition="Item.Von">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Von  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Von:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bis">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bis  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Bis:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Titel">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Titel  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Titel}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bei">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bei  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Bei}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.DetailListe">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Details  
+                                </td>  
+                                <td class="column-right">  
+                                    <foreach property="Item.DetailListe" item="DetailList">  
+                                        <conditional condition="DetailList.Freitext">  
+                                            <p class="m--0">{{DetailList.Freitext}}</p>  
+                                        </conditional>  
+                                        <conditional condition="DetailList.Liste">  
+                                            <ul class="detail-list">  
+                                                <foreach property="DetailList.Liste" item="Detail">  
+                                                    <li>{{Detail.Text}}</li>  
+                                                </foreach>  
+                                            </ul>  
+                                        </conditional>  
+                                    </foreach>  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+  
+                        <!-- Empty row for spacing -->  
+                        <tr>  
+                            <td class="column-left">&nbsp;</td>  
+                            <td class="column-right">&nbsp;</td>  
+                        </tr>  
+  
+                    </foreach>  
+  
+                    <!-- Empty row for spacing -->  
+                    <tr>  
+                        <td class="column-left">&nbsp;</td>  
+                        <td class="column-right border-top--black">&nbsp;</td>  
+                    </tr>  
+  
+                </conditional>  
+  
+                <!-- Studium -->  
+                <conditional condition="Mitarbeiter.AusbildungStudien">  
+                    <tr>  
+                        <td class="column-left">  
+                            <b>  
+                                Studium  
+                            </b>  
+                        </td>  
+                        <td class="column-right">&nbsp;</td>  
+                    </tr>  
+  
+                    <foreach property="Mitarbeiter.AusbildungStudien" item="Item" sort="Item.Von desc,Item.Bis desc">  
+                        <conditional condition="Item.Von">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Von  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Von:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bis">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bis  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Bis:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Titel">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Titel  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Titel}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bei">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bei  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Bei}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Details">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Details  
+                                </td>  
+                                <td class="column-right">  
+                                    <foreach property="Item.DetailListe" item="DetailList">  
+                                        <conditional condition="DetailList.Freitext">  
+                                            <p class="m--0">{{DetailList.Freitext}}</p>  
+                                        </conditional>  
+                                        <conditional condition="DetailList.Liste">  
+                                            <ul class="detail-list">  
+                                                <foreach property="DetailList.Liste" item="Detail">  
+                                                    <li>{{Detail.Text}}</li>  
+                                                </foreach>  
+                                            </ul>  
+                                        </conditional>  
+                                    </foreach>  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+  
+                        <!-- Empty row for spacing -->  
+                        <tr>  
+                            <td class="column-left">&nbsp;</td>  
+                            <td class="column-right">&nbsp;</td>  
+                        </tr>  
+  
+                    </foreach>  
+  
+                    <!-- Empty row for spacing -->  
+                    <tr>  
+                        <td class="column-left">&nbsp;</td>  
+                        <td class="column-right border-top--black">&nbsp;</td>  
+                    </tr>  
+  
+                </conditional>  
+  
+                <!-- Berufliche Ausbildung -->  
+                <conditional condition="Mitarbeiter.AusbildungBerufe">  
+                    <tr>  
+                        <td class="column-left">  
+                            <b>  
+                                Berufliche Ausbildung  
+                            </b>  
+                        </td>  
+                        <td class="column-right">&nbsp;</td>  
+                    </tr>  
+  
+                    <foreach property="Mitarbeiter.AusbildungBerufe" item="Item" sort="Item.Von desc,Item.Bis desc">  
+                        <conditional condition="Item.Von">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Von  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Von:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bis">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bis  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Bis:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Titel">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Titel  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Titel}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bei">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bei  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Bei}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Details">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Details  
+                                </td>  
+                                <td class="column-right">  
+                                    <foreach property="Item.DetailListe" item="DetailList">  
+                                        <conditional condition="DetailList.Freitext">  
+                                            <p class="m--0">{{DetailList.Freitext}}</p>  
+                                        </conditional>  
+                                        <conditional condition="DetailList.Liste">  
+                                            <ul class="detail-list">  
+                                                <foreach property="DetailList.Liste" item="Detail">  
+                                                    <li>{{Detail.Text}}</li>  
+                                                </foreach>  
+                                            </ul>  
+                                        </conditional>  
+                                    </foreach>  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+  
+                        <!-- Empty row for spacing -->  
+                        <tr>  
+                            <td class="column-left">&nbsp;</td>  
+                            <td class="column-right">&nbsp;</td>  
+                        </tr>  
+  
+                    </foreach>  
+  
+                    <!-- Empty row for spacing -->  
+                    <tr>  
+                        <td class="column-left">&nbsp;</td>  
+                        <td class="column-right border-top--black">&nbsp;</td>  
+                    </tr>  
+  
+                </conditional>  
+  
+                <!-- Schulische Ausbildung -->  
+                <conditional condition="Mitarbeiter.AusbildungSchulen">  
+                    <tr>  
+                        <td class="column-left">  
+                            <b>  
+                                Schulische Ausbildung  
+                            </b>  
+                        </td>  
+                        <td class="column-right">&nbsp;</td>  
+                    </tr>  
+  
+                    <foreach property="Mitarbeiter.AusbildungSchulen" item="Item" sort="Item.Von desc,Item.Bis desc">  
+                        <conditional condition="Item.Von">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Von  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Von:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bis">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bis  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Bis:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Titel">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Titel  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Titel}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bei">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bei  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Bei}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Details">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Details  
+                                </td>  
+                                <td class="column-right">  
+                                    <foreach property="Item.DetailListe" item="DetailList">  
+                                        <conditional condition="DetailList.Freitext">  
+                                            <p class="m--0">{{DetailList.Freitext}}</p>  
+                                        </conditional>  
+                                        <conditional condition="DetailList.Liste">  
+                                            <ul class="detail-list">  
+                                                <foreach property="DetailList.Liste" item="Detail">  
+                                                    <li>{{Detail.Text}}</li>  
+                                                </foreach>  
+                                            </ul>  
+                                        </conditional>  
+                                    </foreach>  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+  
+                        <!-- Empty row for spacing -->  
+                        <tr>  
+                            <td class="column-left">&nbsp;</td>  
+                            <td class="column-right">&nbsp;</td>  
+                        </tr>  
+  
+                    </foreach>  
+  
+                    <!-- Empty row for spacing -->  
+                    <tr>  
+                        <td class="column-left">&nbsp;</td>  
+                        <td class="column-right border-top--black">&nbsp;</td>  
+                    </tr>  
+  
+                </conditional>  
+  
+                <!-- Weiterbildungen -->  
+                <conditional condition="Mitarbeiter.AusbildungWeiterbildungen">  
+                    <tr>  
+                        <td class="column-left">  
+                            <b>  
+                                Weiterbildungen  
+                            </b>  
+                        </td>  
+                        <td class="column-right">&nbsp;</td>  
+                    </tr>  
+  
+                    <foreach property="Mitarbeiter.AusbildungWeiterbildungen" item="Item" sort="Item.Von desc,Item.Bis desc">  
+                        <conditional condition="Item.Von">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Von  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Von:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bis">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bis  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Bis:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Titel">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Titel  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Titel}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bei">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bei  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Bei}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Details">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Details  
+                                </td>  
+                                <td class="column-right">  
+                                    <foreach property="Item.DetailListe" item="DetailList">  
+                                        <conditional condition="DetailList.Freitext">  
+                                            <p class="m--0">{{DetailList.Freitext}}</p>  
+                                        </conditional>  
+                                        <conditional condition="DetailList.Liste">  
+                                            <ul class="detail-list">  
+                                                <foreach property="DetailList.Liste" item="Detail">  
+                                                    <li>{{Detail.Text}}</li>  
+                                                </foreach>  
+                                            </ul>  
+                                        </conditional>  
+                                    </foreach>  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+  
+                        <!-- Empty row for spacing -->  
+                        <tr>  
+                            <td class="column-left">&nbsp;</td>  
+                            <td class="column-right">&nbsp;</td>  
+                        </tr>  
+  
+                    </foreach>  
+  
+                    <!-- Empty row for spacing -->  
+                    <tr>  
+                        <td class="column-left">&nbsp;</td>  
+                        <td class="column-right border-top--black">&nbsp;</td>  
+                    </tr>  
+  
+                </conditional>  
+  
+                <!-- Dienste -->  
+                <conditional condition="Mitarbeiter.Dienste">  
+                    <tr>  
+                        <td class="column-left">  
+                            <b>  
+                                Dienste  
+                            </b>  
+                        </td>  
+                        <td class="column-right">&nbsp;</td>  
+                    </tr>  
+  
+                    <foreach property="Mitarbeiter.Dienste" item="Item" sort="Item.Von desc,Item.Bis desc">  
+                        <conditional condition="Item.Von">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Von  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Von:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bis">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bis  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Bis:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Titel">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Titel  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Titel}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bei">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bei  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Bei}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Details">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Details  
+                                </td>  
+                                <td class="column-right">  
+                                    <foreach property="Item.DetailListe" item="DetailList">  
+                                        <conditional condition="DetailList.Freitext">  
+                                            <p class="m--0">{{DetailList.Freitext}}</p>  
+                                        </conditional>  
+                                        <conditional condition="DetailList.Liste">  
+                                            <ul class="detail-list">  
+                                                <foreach property="DetailList.Liste" item="Detail">  
+                                                    <li>{{Detail.Text}}</li>  
+                                                </foreach>  
+                                            </ul>  
+                                        </conditional>  
+                                    </foreach>  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+  
+                        <!-- Empty row for spacing -->  
+                        <tr>  
+                            <td class="column-left">&nbsp;</td>  
+                            <td class="column-right">&nbsp;</td>  
+                        </tr>  
+  
+                    </foreach>  
+  
+                    <!-- Empty row for spacing -->  
+                    <tr>  
+                        <td class="column-left">&nbsp;</td>  
+                        <td class="column-right border-top--black">&nbsp;</td>  
+                    </tr>  
+  
+                </conditional>  
+  
+                <!-- Kurse -->  
+                <conditional condition="Mitarbeiter.Kurse">  
+                    <tr>  
+                        <td class="column-left">  
+                            <b>  
+                                Kurse  
+                            </b>  
+                        </td>  
+                        <td class="column-right">&nbsp;</td>  
+                    </tr>  
+  
+                    <foreach property="Mitarbeiter.Kurse" item="Item" sort="Item.Von desc,Item.Bis desc">  
+                        <conditional condition="Item.Von">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Von  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Von:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bis">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bis  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Bis:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Titel">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Titel  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Titel}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bei">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bei  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Bei}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Details">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Details  
+                                </td>  
+                                <td class="column-right">  
+                                    <foreach property="Item.DetailListe" item="DetailList">  
+                                        <conditional condition="DetailList.Freitext">  
+                                            <p class="m--0">{{DetailList.Freitext}}</p>  
+                                        </conditional>  
+                                        <conditional condition="DetailList.Liste">  
+                                            <ul class="detail-list">  
+                                                <foreach property="DetailList.Liste" item="Detail">  
+                                                    <li>{{Detail.Text}}</li>  
+                                                </foreach>  
+                                            </ul>  
+                                        </conditional>  
+                                    </foreach>  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+  
+                        <!-- Empty row for spacing -->  
+                        <tr>  
+                            <td class="column-left">&nbsp;</td>  
+                            <td class="column-right">&nbsp;</td>  
+                        </tr>  
+  
+                    </foreach>  
+  
+                    <!-- Empty row for spacing -->  
+                    <tr>  
+                        <td class="column-left">&nbsp;</td>  
+                        <td class="column-right border-top--black">&nbsp;</td>  
+                    </tr>  
+  
+                </conditional>  
+  
+                <!-- Sonstiges -->  
+                <conditional condition="Mitarbeiter.AusbildungSonstige">  
+                    <tr>  
+                        <td class="column-left">  
+                            <b>  
+                                Sonstiges  
+                            </b>  
+                        </td>  
+                        <td class="column-right">&nbsp;</td>  
+                    </tr>  
+  
+                    <foreach property="Mitarbeiter.AusbildungSonstige" item="Item" sort="Item.Von desc,Item.Bis desc">  
+                        <conditional condition="Item.Von">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Von  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Von:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bis">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bis  
+                                </td>  
+                                <td class="column-right">  
+                                    {{Item.Bis:format='MM\/yyyy'}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Titel">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Titel  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Titel}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Bei">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Bei  
+                                </td>  
+                                <td class="column-right font--bold">  
+                                    {{Item.Bei}}  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+                        <conditional condition="Item.Details">  
+                            <tr>  
+                                <td class="column-left">  
+                                    Details  
+                                </td>  
+                                <td class="column-right">  
+                                    <foreach property="Item.DetailListe" item="DetailList">  
+                                        <conditional condition="DetailList.Freitext">  
+                                            <p class="m--0">{{DetailList.Freitext}}</p>  
+                                        </conditional>  
+                                        <conditional condition="DetailList.Liste">  
+                                            <ul class="detail-list">  
+                                                <foreach property="DetailList.Liste" item="Detail">  
+                                                    <li>{{Detail.Text}}</li>  
+                                                </foreach>  
+                                            </ul>  
+                                        </conditional>  
+                                    </foreach>  
+                                </td>  
+                            </tr>  
+                        </conditional>  
+  
+                        <!-- Empty row for spacing -->  
+                        <tr>  
+                            <td class="column-left">&nbsp;</td>  
+                            <td class="column-right">&nbsp;</td>  
+                        </tr>  
+  
+                    </foreach>  
+  
+                    <!-- Empty row for spacing -->  
+                    <tr>  
+                        <td class="column-left">&nbsp;</td>  
+                        <td class="column-right border-top--black">&nbsp;</td>  
+                    </tr>  
+  
+                </conditional>  
+  
+                <!-- Qualifikationen -->  
+                <conditional condition="Mitarbeiter.SkillGruppen">  
+                    <tr>  
+                        <td class="column-left">  
+                            <b>  
+                                Qualifikationen  
+                            </b>  
+                        </td>  
+                        <td class="column-right">&nbsp;</td>  
+                    </tr>  
+  
+                    <foreach property="Mitarbeiter.SkillGruppen" item="Gruppe" sort="Gruppe.Bezeichnung asc">  
+                        <tr>  
+                            <td class="column-left">  
+                                {{ Gruppe.Bezeichnung }}  
+                            </td>  
+                            <td class="column-right">  
+                                <foreach property="Gruppe.Elemente" item="Item" sort="Item.Bezeichnung asc">  
+                                    <p class="skill-item">  
+                                        <img src="{{Item.AuspraegungAmpel}}"> {{Item.Bezeichnung}}  
+                                    </p>  
+                                </foreach>  
+                            </td>  
+                        </tr>  
+                    </foreach>  
+  
+                    <!-- Empty row for spacing -->  
+                    <tr>  
+                        <td class="column-left">&nbsp;</td>  
+                        <td class="column-right">&nbsp;</td>  
+                    </tr>  
+  
+                </conditional>  
+  
+                <tr>  
+                    <td class="footer-column-left border-top--black">&nbsp;</td>  
+                    <td class="footer-column-right border-top--black">&nbsp;</td>  
+                </tr>  
+  
+                <tr>  
+                    <td class="footer-column-left">  
+                        <b>  
+                            Ansprechpartner  
+                        </b>  
+                    </td>  
+                    <td class="footer-column-right">&nbsp;</td>  
+                </tr>  
+  
+                <conditional condition="Allgemein.Benutzer.Lastname">  
+                    <tr>  
+                        <td class="footer-column-left">  
+                            Name  
+                        </td>  
+                        <td class="footer-column-right">  
+                            <span *if="Allgemein.Benutzer.AnredeVornameNachname">{{Allgemein.Benutzer.AnredeVornameNachname}}</span>  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <conditional condition="Mitarbeiter.Mandant.Firmenbezeichnung">  
+                    <tr>  
+                        <td class="footer-column-left">  
+                            Unternehmen  
+                        </td>  
+                        <td class="footer-column-right">  
+                            {{Mitarbeiter.Mandant.Firmenbezeichnung}}  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <conditional condition="Mitarbeiter.Mandant.AdresseStrasse">  
+                    <tr>  
+                        <td class="footer-column-left">  
+                            Adresse  
+                        </td>  
+                        <td class="footer-column-right">  
+                            {{Mitarbeiter.Mandant.AdresseStrasse}} {{Mitarbeiter.Mandant.AdresseHausnummer}}  
+                            <br>  
+                            {{Mitarbeiter.Mandant.AdressePlz}} {{Mitarbeiter.Mandant.AdresseOrt}}  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <conditional condition="Allgemein.Benutzer.Telefon">  
+                    <tr>  
+                        <td class="footer-column-left">  
+                            Telefon  
+                        </td>  
+                        <td class="footer-column-right">  
+                            {{Allgemein.Benutzer.Telefon}}<span *if="Allgemein.Benutzer.Durchwahl"> - {{Allgemein.Benutzer.Durchwahl}}</span>  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <conditional condition="Allgemein.Benutzer.Username">  
+                    <tr>  
+                        <td class="footer-column-left">  
+                            E-Mail  
+                        </td>  
+                        <td class="footer-column-right">  
+                            {{Allgemein.Benutzer.Username}}  
+                        </td>  
+                    </tr>  
+                </conditional>  
+  
+                <tr>  
+                    <td class="footer-column-left">  
+                        &nbsp;  
+                    </td>  
+                    <td class="footer-column-left text--right">  
+                        <i style="font-size: 13px; color: #707070">Profil erstellt am: {{Allgemein.Datum}}</i>  
+                    </td>  
+                </tr>  
+  
+            </tbody>  
+        </table>  
+  
+    </body>  
+</html>  

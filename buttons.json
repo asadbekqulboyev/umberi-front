@@ -1,0 +1,82 @@
+{
+  "buttons": [
+    {
+      "picture": {
+        "url": "assets/images/btn_flag1.svg",
+        "alt": "Флаг Уганды"
+      },
+      "background": {
+        "url": "assets/images/quiz_btn1.png"
+      },
+      "textContent": "Уганда",
+      "description": "Республика Уганда",
+      "publicId": "tzE4-P4wlg-wfyJ",
+      "name": "Республика Уганда"
+    },
+    {
+      "picture": {
+        "url": "assets/images/btn_flag2.svg",
+        "alt": "Флаг Руанды"
+      },
+      "background": {
+        "url": "assets/images/quiz_btn2.png"
+      },
+      "textContent": "Руанда",
+      "description": "Республика Руанда",
+      "publicId": "YMV2-wYOQa-A03j",
+      "name": "Республика Руанда"
+    },
+    {
+      "picture": {
+        "url": "assets/images/btn_flag3.svg",
+        "alt": "Флаг Южного Судана"
+      },
+      "background": {
+        "url": "assets/images/quiz_btn3.png"
+      },
+      "textContent": "Южный Судан",
+      "description": "Республика Южный Судан",
+      "publicId": "jlZ4-lbUIM-fTPh",
+      "name": "Республика Южный Судан"
+    },
+    {
+      "picture": {
+        "url": "assets/images/btn_flag4.svg",
+        "alt": "Флаг Республики Конго"
+      },
+      "background": {
+        "url": "assets/images/quiz_btn4.png"
+      },
+      "textContent": "Конго",
+      "description": "Республика Конго",
+      "publicId": "92DP-XelBs-cBGh",
+      "name": "Республика Конго"
+    },
+    {
+      "picture": {
+        "url": "assets/images/btn_flag5.svg",
+        "alt": "Флаг Замбии"
+      },
+      "background": {
+        "url": "assets/images/quiz_btn5.png"
+      },
+      "textContent": "Замбия",
+      "description": "Республика Замбия",
+      "publicId": "IrP2-NFDGQ-FIaY",
+      "name": "Республика Замбия"
+    },
+    {
+      "picture": {
+        "url": "assets/images/btn_flag6.svg",
+        "alt": "Флаг ДР Конго"
+      },
+      "background": {
+        "url": "assets/images/quiz_btn6.png"
+      },
+      "textContent": "ДР Конго",
+      "description": "Демократическая Республика Конго",
+      "publicId": "0jap-C4Zb2-nXga",
+      "name": "Демократическая Республика Конго"
+    }
+  ]
+}

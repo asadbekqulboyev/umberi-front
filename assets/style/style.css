@@ -49,11 +49,7 @@ body {
 body {
   font-family: var(--font-body);
   color: var(--sky-50);
-
 }
-
-
-
 .quiz_screen {
   position: relative;
   isolation: isolate;
@@ -62,7 +58,6 @@ body {
   padding: 18px 18px 20px;
   position: relative;
 }
-
 .quiz-screen__background {
   position: absolute;
   inset: 0;

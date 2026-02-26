@@ -1,57 +1,65 @@
-(() => {
+(
+() => {
   const BUTTONS_JSON_URL = "buttons.json";
-
   const STATE_CLASS_MAP = {
     default: "answer-button--default",
     hovered: "answer-button--hovered",
     active: "answer-button--active",
     correct: "answer-button--correct",
     incorrect: "answer-button--incorrect",
-    disabled: "answer-button--disabled"
+    disabled: "answer-button--disabled",
   };
   const ALL_STATE_CLASSES = Object.values(STATE_CLASS_MAP);
-  const quizRootElement = document.querySelector(".quiz-screen");
+  const quizRootElement = document.querySelector(".quiz_screen");
   const answerGridElement = document.getElementById("answerGrid");
   const answerStatusElement = document.getElementById("answerStatus");
   const questionValueElement = document.getElementById("questionValue");
   const answerDataElement = document.getElementById("answerButtonsData");
-
   if (!quizRootElement || !answerGridElement) {
     return;
   }
-
   initQuiz().catch((error) => {
     console.error("Quiz initialization failed", error);
     if (answerStatusElement) {
       answerStatusElement.textContent = "Не удалось загрузить варианты ответа.";
     }
   });
-
   async function initQuiz() {
     const parsedData = await resolveButtonsData();
 
-    if (!parsedData || !Array.isArray(parsedData.buttons) || parsedData.buttons.length === 0) {
+    if (
+      !parsedData ||
+      !Array.isArray(parsedData.buttons) ||
+      parsedData.buttons.length === 0
+    ) {
       if (answerStatusElement) {
-        answerStatusElement.textContent = "Не удалось загрузить варианты ответа.";
+        answerStatusElement.textContent =
+          "Не удалось загрузить варианты ответа.";
       }
       return;
     }
 
-    const normalizedButtons = parsedData.buttons.map(normalizeButtonData).filter(Boolean);
+    const normalizedButtons = parsedData.buttons
+      .map(normalizeButtonData)
+      .filter(Boolean);
 
     if (normalizedButtons.length === 0) {
       if (answerStatusElement) {
-        answerStatusElement.textContent = "Не удалось загрузить варианты ответа.";
+        answerStatusElement.textContent =
+          "Не удалось загрузить варианты ответа.";
       }
       return;
     }
 
     const correctPublicId =
-      quizRootElement.dataset.correctPublicId || normalizedButtons[0].publicId || "";
+      quizRootElement.dataset.correctPublicId ||
+      normalizedButtons[0].publicId ||
+      "";
 
     const questionLabel =
       quizRootElement.dataset.questionLabel ||
-      normalizedButtons.find((button) => button.publicId === correctPublicId)?.name ||
+      normalizedButtons.find((button) => button.publicId === correctPublicId)
+        ?.name ||
       normalizedButtons[0].name ||
       "";
 
@@ -61,7 +69,7 @@
 
     const quizState = {
       isAnswered: false,
-      selectedPublicId: null
+      selectedPublicId: null,
     };
 
     const answerButtonElements = [];
@@ -71,7 +79,7 @@
         buttonData,
         quizState,
         correctPublicId,
-        answerButtonElements
+        answerButtonElements,
       );
 
       answerButtonElements.push(buttonElement);
@@ -81,13 +89,16 @@
 
   async function resolveButtonsData() {
     const inlineData = parseButtonsData(answerDataElement?.textContent || "");
-    if (inlineData && Array.isArray(inlineData.buttons) && inlineData.buttons.length > 0) {
+    if (
+      inlineData &&
+      Array.isArray(inlineData.buttons) &&
+      inlineData.buttons.length > 0
+    ) {
       return inlineData;
     }
 
     return fetchButtonsData(BUTTONS_JSON_URL);
   }
-
   async function fetchButtonsData(url) {
     try {
       const response = await fetch(url, { cache: "no-store" });
@@ -100,7 +111,6 @@
       return null;
     }
   }
-
   function normalizeButtonData(rawButtonData, buttonIndex) {
     if (!rawButtonData || typeof rawButtonData !== "object") {
       return null;
@@ -111,28 +121,35 @@
     return {
       publicId: rawButtonData.publicId || `answer-${buttonIndex + 1}`,
       name: rawButtonData.name || rawButtonData.textContent || fallbackLabel,
-      textContent: rawButtonData.textContent || rawButtonData.name || fallbackLabel,
+      textContent:
+        rawButtonData.textContent || rawButtonData.name || fallbackLabel,
       description: rawButtonData.description || rawButtonData.name || "",
       pictureUrl: rawButtonData.picture?.url || "",
       pictureAlt: rawButtonData.picture?.alt || "",
-      backgroundUrl: rawButtonData.background?.url || ""
+      backgroundUrl: rawButtonData.background?.url || "",
     };
   }
-
   function createAnswerButton(buttonData, state, expectedId, allButtons) {
     const buttonElement = document.createElement("button");
     buttonElement.type = "button";
     buttonElement.className = `answer-button ${STATE_CLASS_MAP.default}`;
     buttonElement.dataset.state = "default";
     buttonElement.dataset.publicId = buttonData.publicId;
-    buttonElement.dataset.answerLabel = buttonData.name || buttonData.textContent;
+    buttonElement.dataset.answerLabel =
+      buttonData.name || buttonData.textContent;
     buttonElement.setAttribute("role", "option");
     buttonElement.setAttribute("aria-pressed", "false");
 
     if (buttonData.backgroundUrl) {
       // Convert path relative to style.css: assets/images/quiz_btn1.png -> ../images/quiz_btn1.png
-      const relativePath = buttonData.backgroundUrl.replace('assets/images/', '../images/');
-      buttonElement.style.setProperty("--answer-bg-image", `url('${relativePath}')`);
+      const relativePath = buttonData.backgroundUrl.replace(
+        "assets/images/",
+        "../images/",
+      );
+      buttonElement.style.setProperty(
+        "--answer-bg-image",
+        `url('${relativePath}')`,
+      );
     }
 
     const flagElement = document.createElement("span");
@@ -210,10 +227,12 @@
         const answerLabel = buttonElement.dataset.answerLabel || "";
         answerStatusElement.classList.remove(
           "quiz-answers__status--correct",
-          "quiz-answers__status--incorrect"
+          "quiz-answers__status--incorrect",
         );
         answerStatusElement.classList.add(
-          isCorrectSelection ? "quiz-answers__status--correct" : "quiz-answers__status--incorrect"
+          isCorrectSelection
+            ? "quiz-answers__status--correct"
+            : "quiz-answers__status--incorrect",
         );
         answerStatusElement.textContent = isCorrectSelection
           ? `Верно: ${answerLabel}.`
@@ -223,18 +242,18 @@
 
     return buttonElement;
   }
-
   function applyTransientState(buttonElement, state, nextState) {
     if (state.isAnswered || buttonElement.disabled) {
       return;
     }
     setButtonState(buttonElement, nextState);
   }
-
   function finalizeAnswers(allButtons, selectedButton, isCorrectSelection) {
     answerGridElement.classList.add("answer-grid--locked");
     answerGridElement.classList.add(
-      isCorrectSelection ? "answer-grid--result-correct" : "answer-grid--result-incorrect"
+      isCorrectSelection
+        ? "answer-grid--result-correct"
+        : "answer-grid--result-incorrect",
     );
 
     allButtons.forEach((buttonElement) => {
@@ -244,7 +263,10 @@
       buttonElement.setAttribute("aria-disabled", "true");
 
       if (isSelected) {
-        setButtonState(buttonElement, isCorrectSelection ? "correct" : "incorrect");
+        setButtonState(
+          buttonElement,
+          isCorrectSelection ? "correct" : "incorrect",
+        );
         buttonElement.classList.add("answer-button--selected");
         buttonElement.setAttribute("aria-pressed", "true");
         return;
@@ -254,13 +276,13 @@
       buttonElement.setAttribute("aria-pressed", "false");
     });
   }
-
   function setButtonState(buttonElement, nextState) {
     buttonElement.classList.remove(...ALL_STATE_CLASSES);
-    buttonElement.classList.add(STATE_CLASS_MAP[nextState] || STATE_CLASS_MAP.default);
+    buttonElement.classList.add(
+      STATE_CLASS_MAP[nextState] || STATE_CLASS_MAP.default,
+    );
     buttonElement.dataset.state = nextState;
   }
-
   function parseButtonsData(rawData) {
     if (!rawData || !rawData.trim()) {
       return null;
